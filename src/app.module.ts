@@ -1,12 +1,10 @@
 // * App.module is like a shopping cart.
 
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
+import { MoviesController } from './movies/movies.controller';
 @Module({
   imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [MoviesController],
+  providers: [],
 })
 export class AppModule {}
