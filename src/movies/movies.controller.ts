@@ -8,7 +8,6 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { title } from 'process';
 
 interface MovieData {
   title: string;
