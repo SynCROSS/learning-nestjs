@@ -1,3 +1,5 @@
+// * service is the place actually executing business logic.
+
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
