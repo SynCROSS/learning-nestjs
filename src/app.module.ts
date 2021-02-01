@@ -1,5 +1,3 @@
-// * App.module is like a shopping cart.
-
 import { Module } from '@nestjs/common';
 import { MoviesController } from './movies/movies.controller';
 import { MoviesService } from './movies/movies.service';
