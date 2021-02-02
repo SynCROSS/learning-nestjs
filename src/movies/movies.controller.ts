@@ -23,12 +23,12 @@ export class MoviesController {
 
   @Get('search')
   searchMovieByTitle(@Query('title') title: string) {
-    this.moviesService.searchMovieByTitle(title);
+    return this.moviesService.searchMovieByTitle(title);
   }
 
   @Get(':id')
   getMovieById(@Param('id') id: number): Movie {
-    return this.moviesService.getMovieById(+id);
+    return this.moviesService.getMovieById(id);
   }
 
   @Post('add')
@@ -37,12 +37,15 @@ export class MoviesController {
   }
 
   @Patch(':id')
-  updateMovieById(@Param('id') id: number, @Body() movieData: MovieDataDTO) {
+  updateMovieById(
+    @Param('id') id: number,
+    @Body() movieData: Partial<MovieDataDTO>,
+  ) {
     return this.moviesService.updateMovieById(id, movieData);
   }
 
   @Delete(':id')
   removeMovieById(@Param('id') id: number): boolean {
-    return this.moviesService.removeMovieById(+id);
+    return this.moviesService.removeMovieById(id);
   }
 }

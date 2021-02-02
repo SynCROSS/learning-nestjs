@@ -34,7 +34,7 @@ export class MoviesService {
 
   searchMovieByTitle(title: string): Movie {
     const movie = this.movies.find(movie => title === movie.title);
-
+    this.getMovieById(movie?.id ?? NaN);
     return movie;
   }
 
@@ -45,7 +45,6 @@ export class MoviesService {
       throw new NotFoundException(`Movie matching that id ${id} is not found`);
     }
     return movie;
-    // return this.movies.find(movie => id === movie.id);
   }
 
   addMovie(movieData: MovieDataDTO): Movie {
@@ -57,7 +56,10 @@ export class MoviesService {
 
     const newMovie: Movie = {
       id: this.movies.length + 1,
-      ...movieData,
+      title: movieData.title,
+      description: movieData.description ?? '',
+      year: movieData.year,
+      genres: movieData.genres ?? [''],
     };
 
     this.movies.push(newMovie);
@@ -65,12 +67,15 @@ export class MoviesService {
     return newMovie;
   }
 
-  updateMovieById(id: number, movieData: MovieDataDTO): Movie {
-    this.getMovieById(id);
+  updateMovieById(id: number, movieData: Partial<MovieDataDTO>): Movie {
+    const originalMovie = this.getMovieById(id);
 
     const updatedMovie: Movie = (this.movies[id - 1] = {
       id,
-      ...movieData,
+      title: movieData.title ?? originalMovie.title,
+      description: movieData.description ?? originalMovie.description,
+      year: movieData.year ?? originalMovie.year,
+      genres: movieData.genres ?? originalMovie.genres,
     });
 
     return updatedMovie;
