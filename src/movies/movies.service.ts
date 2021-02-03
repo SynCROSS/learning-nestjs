@@ -34,8 +34,7 @@ export class MoviesService {
 
   searchMovieByTitle(title: string): Movie {
     const movie = this.movies.find(movie => title === movie.title);
-    this.getMovieById(movie?.id ?? NaN);
-    return movie;
+    return this.getMovieById(movie?.id ?? NaN);
   }
 
   getMovieById(id: number): Movie {
