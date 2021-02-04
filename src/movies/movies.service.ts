@@ -81,9 +81,9 @@ export class MoviesService {
   }
 
   removeMovieById(id: number): boolean {
-    this.getMovieById(id);
-
-    const filteredMovies = this.movies.filter(movie => id !== movie.id);
+    const filteredMovies = this.movies.filter(
+      movie => this.getMovieById(id) !== movie,
+    );
 
     if (this.movies.length > filteredMovies.length) {
       this.movies = filteredMovies;
