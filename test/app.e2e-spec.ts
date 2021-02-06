@@ -22,7 +22,21 @@ describe('AppController (e2e)', () => {
       .expect('Hello World!');
   });
 
-  it('/movies (GET)', () => {
-    return request(app.getHttpServer()).get('/movies').expect(200);
+  describe('/movies', () => {
+    it('/ (GET)', () => {
+      return request(app.getHttpServer()).get('/movies').expect(200);
+    });
+
+    it('/add (POST)', () => {
+      return request(app.getHttpServer())
+        .post('/movies/add')
+        .send({
+          title: 'test',
+          description: 'description',
+          year: 2021,
+          genres: ['serneg'],
+        })
+        .expect(201);
+    });
   });
 });
