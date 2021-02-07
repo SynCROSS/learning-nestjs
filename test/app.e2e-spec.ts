@@ -53,5 +53,13 @@ describe('AppController (e2e)', () => {
     it('/ (GET)', () => {
       return request(app.getHttpServer()).get(`/movies/${id}`).expect(200);
     });
+
+    it('/ (PATCH)', () => {
+      return request(app.getHttpServer()).patch(`/movies/${id}`).send({
+        title: 'title4',
+        description: 'description4',
+        year: 3,
+      });
+    });
   });
 });
