@@ -61,5 +61,9 @@ describe('AppController (e2e)', () => {
         year: 3,
       });
     });
+
+    it('/ (DELETE)', () => {
+      return request(app.getHttpServer()).delete(`/movies/${id}`).expect(200);
+    });
   });
 });
