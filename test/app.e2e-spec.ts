@@ -55,11 +55,14 @@ describe('AppController (e2e)', () => {
     });
 
     it('/ (PATCH)', () => {
-      return request(app.getHttpServer()).patch(`/movies/${id}`).send({
-        title: 'title4',
-        description: 'description4',
-        year: 3,
-      });
+      return request(app.getHttpServer())
+        .patch(`/movies/${id}`)
+        .send({
+          title: 'title4',
+          description: 'description4',
+          year: 3,
+        })
+        .expect(200);
     });
 
     it('/ (DELETE)', () => {
