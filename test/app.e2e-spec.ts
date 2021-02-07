@@ -1,17 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+      }),
+    );
     await app.init();
   });
 
@@ -37,6 +44,14 @@ describe('AppController (e2e)', () => {
           genres: ['serneg'],
         })
         .expect(201);
+    });
+  });
+
+  describe('/movies/:id', () => {
+    const id = 4;
+
+    it('/ (GET)', () => {
+      return request(app.getHttpServer()).get(`/movies/${id}`).expect(200);
     });
   });
 });
